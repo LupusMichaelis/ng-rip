@@ -4,22 +4,37 @@
     <meta charset='utf-8' />
   </head>
   <body>
-    <div ng-controller='DraftController as draft'>
-      <label>Name:</label>
-      <input type='text'
-             ng-model='draft.yourName'
-             placeholder='Enter a name here'
-             >
-      <hr />
-      <h1>Hello {{draft.yourName}}!</h1>
-    </div>
+    <tabs>
+      <pane title='Former'>
+        <h2>Landing pad!</h2>
+        <p>
+          Lorem Ipsum
+        </p>
+      </pane>
+      <pane title='Latter'>
+        <h2>Draft</h2>
+        <div ng-controller='DraftController as draft'>
+          <label>Name:
+          <input type='text'
+                 ng-model='draft.yourName'
+                 placeholder='Enter a name here'
+                 ></label>
+          <p>Hello {{draft.yourName}}!</p>
+        </div>
+      </pane>
+    </tabs>
+
     <div style='display: none'>
-      <script type='application/ecmascript'
+      <script type='application/javascript'
               src='//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js'
               ></script>
       <script type='application/ecmascript'
               src='draft.js'
               ></script>
+      <link rel='stylesheet'
+            href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css'
+            />
     </div>
+
   </body>
 </html>
