@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('draftApp', [])
-    .controller('DraftController', function()
+    .controller('DraftController', function($scope)
     {
-        this.yourName = '';
+        this.yourName = $scope.yourName || '';
+        this.yourEmail = $scope.yourEmail || '';
     })
     .directive('tabs', () => (
         { restrict: 'E'
