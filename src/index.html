@@ -16,12 +16,24 @@
       <pane title='Latter'>
         <h2>Draft</h2>
         <div ng-controller='DraftController as draft'>
-          <label>Name:
-          <input type='text'
-                 ng-model='draft.yourName'
-                 placeholder='Enter a name here'
-                 ></label>
-          <p>Hello {{draft.yourName}}!</p>
+          <form name='sendEmail'>
+            <p>
+              <label>Name:
+              <input type='text'
+                     ng-model='draft.yourName'
+                     placeholder='Enter a name here'
+                     ></label>
+              <label>Email:
+              <input type='email'
+                     name='yourEmail'
+                     ng-model='draft.yourEmail'
+                     placeholder='Enter your e-name here'
+                     ></label>
+              <span ng-show='sendEmail.yourEmail.$error.email'
+                    >Not a valid e-mail address ({{sendEmail.yourEmail.$error | json}})</span>
+              <p><pre>"{{draft.yourName}} &lt;{{draft.yourEmail}}&gt;"</p>
+            </p>
+          </form>
         </div>
       </pane>
     </tabs>
