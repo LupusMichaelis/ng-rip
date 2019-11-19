@@ -19,19 +19,30 @@
           <form name='sendEmail'>
             <p>
               <label>Name:
-              <input type='text'
-                     ng-model='draft.yourName'
-                     placeholder='Enter a name here'
-                     ></label>
+              <input
+                  type='text'
+                  ng-model='draft.yourName'
+                  placeholder='Enter a name here'
+                  ></label>
               <label>Email:
-              <input type='email'
-                     name='yourEmail'
-                     ng-model='draft.yourEmail'
-                     placeholder='Enter your e-name here'
-                     ></label>
+              <input
+                  type='email'
+                  name='yourEmail'
+                  ng-model='draft.yourEmail'
+                  placeholder='Enter your e-mail address here'
+                  ></label>
+              <label>Content:
+              <textarea
+                  type='content'
+                  name='yourContent'
+                  ng-model='draft.yourContent'
+                  placeholder='Enter your e-mail content here'
+                  ></textarea></label>
               <span ng-show='sendEmail.yourEmail.$error.email'
                     >Not a valid e-mail address ({{sendEmail.yourEmail.$error | json}})</span>
-              <p><pre>"{{draft.yourName}} &lt;{{draft.yourEmail}}&gt;"</p>
+              <p>
+                <pre>"{{draft.yourName}} &lt;{{draft.yourEmail}}&gt;"{{"\n" + draft.yourContent }}</pre>
+              </p>
             </p>
           </form>
         </div>
@@ -41,12 +52,15 @@
     <div style='display: none'>
       <script type='application/javascript'
               src='//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js'
+              defer
               ></script>
       <script type='application/ecmascript'
               src='draft.js'
+              defer
               ></script>
       <link rel='stylesheet'
             href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css'
+            defer
             />
     </div>
 

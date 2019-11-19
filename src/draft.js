@@ -5,6 +5,7 @@ angular.module('draftApp', [])
     {
         this.yourName = $scope.yourName || '';
         this.yourEmail = $scope.yourEmail || '';
+        this.yourContent = $scope.yourContent || '';
     })
     .directive('tabs', () => (
         { restrict: 'E'
@@ -20,25 +21,31 @@ angular.module('draftApp', [])
                 this.addPane = (pane) =>
                 {
                     panes.length || $scope.switchTab(0);
+                    1 === panes.length && (pane.selected = true);
                     panes.push(pane);
-                }
+                };
 
                 $scope.switchTab = (position) =>
-                {
                     $scope.tabIndex = tabIndex = position;
-                }
+
+                $scope.isActivePane = (pane) =>
+                    tabIndex == panes.indexOf(pane);
             }
         , template: `<div class='tabbable'>
                        <ul class='nav nav-tabs'>
                          <li ng-repeat='pane in panes'
-                             ng-class='{active:$index == tabIndex}'
-                             >
-                           <span ng-click='switchTab($index)'>{{ pane.title }}</span>
+                           class='nav-item'
+                           ng-class='{active:$index == tabIndex}'
+                           >
+                           <a
+                             class='nav-link'
+                             ng-click='switchTab($index)'
+                             >{{ pane.title }}</a>
                          </li>
                        </ul>
                        <div ng-transclude
-                            class='tab-content'
-                            />
+                         class='tab-content'
+                         />
                      </div>
                     `
         , replace: true
@@ -55,7 +62,7 @@ angular.module('draftApp', [])
             tabsController.addPane(scope)
         , template: `<div ng-transclude
                           class='tab-pane'
-                          ng-class='{active: $index == tabIndex}'
+                          ng-class='{active: selected}'
                      />`
         , replace: true
         })
