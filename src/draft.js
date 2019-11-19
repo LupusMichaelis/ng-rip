@@ -15,21 +15,21 @@ angular.module('draftApp', [])
             }
         , controller: function($scope)
             {
-                var panes = $scope.panes = [];
-                var tabIndex = $scope.tabIndex = 1;
+                $scope.panes = [];
+                $scope.tabIndex = 1;
 
                 this.addPane = (pane) =>
                 {
-                    panes.length || $scope.switchTab(0);
-                    1 === panes.length && (pane.selected = true);
-                    panes.push(pane);
+                    $scope.panes.length || $scope.switchTab(0);
+                    1 === $scope.panes.length && (pane.selected = true);
+                    $scope.panes.push(pane);
                 };
 
                 $scope.switchTab = (position) =>
-                    $scope.tabIndex = tabIndex = position;
+                    $scope.tabIndex = position;
 
                 $scope.isActivePane = (pane) =>
-                    tabIndex == panes.indexOf(pane);
+                    $scope.tabIndex == $scope.panes.indexOf(pane);
             }
         , template: `<div class='tabbable'>
                        <ul class='nav nav-tabs'>
