@@ -47,6 +47,20 @@
           </form>
         </div>
       </pane>
+      <pane title='Countries'>
+        <h2>Countries</h2>
+        <div ng-controller='CountryController as country'>
+          <div ng-show='!country.all'>
+            Empty list
+          </div>
+          <div ng-show='country.all'>
+            <dl ng-repeat='country in country.all'>
+              <dt>{{country.Code}}</dt>
+              <dd>{{country.Name}}</dd>
+            </dl>
+          </div>
+        </div>
+      </pane>
     </tabs>
 
     <div style='display: none'>

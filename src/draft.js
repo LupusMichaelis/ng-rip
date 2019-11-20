@@ -1,6 +1,21 @@
 'use strict';
 
 angular.module('draftApp', [])
+    .controller('CountryController', function($http, $scope)
+    {
+        this.all = $scope.all = [];
+
+        const url = 'https://172.17.0.2/r/country'
+        const headers =
+            { 'content-type': 'application/json'
+            };
+        const mode = 'cors';
+
+        $http
+            .get(url, {headers, mode})
+            .then(({data}) => this.all = $scope.all = data)
+            .catch(error => console.error(error));
+    })
     .controller('DraftController', function($scope)
     {
         this.yourName = $scope.yourName || '';
