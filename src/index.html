@@ -54,10 +54,21 @@
             Empty list
           </div>
           <div ng-show='country.all'>
-            <dl ng-repeat='country in country.all'>
-              <dt>{{country.Code}}</dt>
-              <dd>{{country.Name}}</dd>
-            </dl>
+            <table>
+              <tbody>
+                <tr ng-repeat='country in country.all'>
+                  <th>{{country.Code}}</th>
+                  <td>{{country.Name}}</td>
+                  <td>{{country.Population}}</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <td>Code</td>
+                  <td>Nom</td>
+                  <td>Population</td>
+                </tr>
+              </thead>
           </div>
         </div>
       </pane>
