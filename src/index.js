@@ -4,7 +4,7 @@ angular.module('draftApp', [])
     .controller('CountryController', function($http, $scope)
     {
         $scope.all = [];
-        $scope.sortCriterion = 'Code';
+        $scope.sortCriterion = null;
         $scope.sortReverse = false;
 
         $scope.sortBy = (criterion) =>
@@ -39,38 +39,25 @@ angular.module('draftApp', [])
         , controller: function($scope)
             {
                 $scope.panes = [];
-                $scope.tabIndex = 1;
+                $scope.tabIndex = 0;
 
                 this.addPane = (pane) =>
                 {
-                    $scope.panes.length || $scope.switchTab(0);
-                    2 === $scope.panes.length && (pane.selected = true);
                     $scope.panes.push(pane);
+
+                    if(pane.isActive)
+                        $scope.switchTab(pane);
                 };
 
-                $scope.switchTab = (position) =>
-                    $scope.tabIndex = position;
-
-                $scope.isActivePane = (pane) =>
-                    $scope.tabIndex == $scope.panes.indexOf(pane);
+                $scope.switchTab = (pane) =>
+                {
+                    $scope.tabIndex < $scope.panes.length &&
+                        ($scope.panes[$scope.tabIndex].isActive = false);
+                    $scope.tabIndex = $scope.panes.indexOf(pane);
+                    $scope.panes[$scope.tabIndex].isActive = true;
+                }
             }
-        , template: `<div class='tabbable'>
-                       <ul class='nav nav-tabs'>
-                         <li ng-repeat='pane in panes'
-                           class='nav-item'
-                           ng-class='{active:$index == tabIndex}'
-                           >
-                           <a
-                             class='nav-link'
-                             ng-click='switchTab($index)'
-                             >{{ pane.title }}</a>
-                         </li>
-                       </ul>
-                       <div ng-transclude
-                         class='tab-content'
-                         />
-                     </div>
-                    `
+        , templateUrl: 'tabcontainer.html'
         , replace: true
         })
     )
@@ -80,13 +67,16 @@ angular.module('draftApp', [])
         , transclude: true
         , scope:
             { title: '@'
+            , active: '='
             }
-        , link: (scope, element, attrs, tabsController) =>
-            tabsController.addPane(scope)
-        , template: `<div ng-transclude
-                          class='tab-pane'
-                          ng-class='{active: selected}'
-                     />`
+        , link:
+            ( scope
+            , element
+            , attrs
+            , tabsController
+            ) =>
+                tabsController.addPane(scope)
+        , templateUrl: 'tabpane.html'
         , replace: true
         })
     )

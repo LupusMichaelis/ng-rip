@@ -1,0 +1,16 @@
+<div class='tabbable'>
+  <ul class='nav nav-tabs'>
+    <li ng-repeat='pane in panes'
+        class='nav-item'
+        ng-class='{active: pane.isActive}'
+        >
+      <a
+        class='nav-link'
+        ng-click='switchTab(pane)'
+        >{{ pane.title }}</a>
+    </li>
+  </ul>
+  <div ng-transclude
+       class='tab-content'
+       />
+</div>
