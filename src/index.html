@@ -14,66 +14,11 @@
         </p>
       </pane>
       <pane title='Latter'>
-        <h2>Draft</h2>
-        <div ng-controller='DraftController as ctrl'>
-          <form name='sendEmail'>
-            <p>
-              <label>Name:
-              <input
-                  type='text'
-                  ng-model='yourName'
-                  placeholder='Enter a name here'
-                  ></label>
-              <label>Email:
-              <input
-                  type='email'
-                  name='yourEmail'
-                  ng-model='yourEmail'
-                  placeholder='Enter your e-mail address here'
-                  ></label>
-              <label>Content:
-              <textarea
-                  type='content'
-                  name='yourContent'
-                  ng-model='yourContent'
-                  placeholder='Enter your e-mail content here'
-                  ></textarea></label>
-              <span ng-show='sendEmail.yourEmail.$error.email'
-                    >Not a valid e-mail address ({{sendEmail.yourEmail.$error | json}})</span>
-              <p>
-                <pre>"{{yourName}} &lt;{{yourEmail}}&gt;"{{"\n" + yourContent }}</pre>
-              </p>
-            </p>
-          </form>
-        </div>
+        <ng-include src='&apos;draft.html&apos;' />
       </pane>
       <pane title='Countries'>
-        <h2>Countries</h2>
-        <div ng-controller='CountryController as ctrl'>
-          <div ng-hide='all'>
-            Empty list
-          </div>
-          <div ng-show='all'>
-            <table>
-              <tbody>
-                <tr ng-repeat='country in all | orderBy : sortCriterion : sortReverse'>
-                  <th>{{country.Code}}</th>
-                  <td>{{country.Name}}</td>
-                  <td>{{country.Population}}</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <td ng-click='sortBy(&apos;Code&apos;)'
-                      >Code</td>
-                  <td ng-click='sortBy(&apos;Name&apos;)'
-                      >Nom</td>
-                  <td ng-click='sortBy(&apos;Population&apos;)'
-                      >Population</td>
-                </tr>
-              </thead>
-          </div>
-        </div>
+        <ng-include src='&apos;countries.html&apos;' />
+      </pane>
       </pane>
     </tabs>
 
