@@ -15,33 +15,33 @@
       </pane>
       <pane title='Latter'>
         <h2>Draft</h2>
-        <div ng-controller='DraftController as draft'>
+        <div ng-controller='DraftController as ctrl'>
           <form name='sendEmail'>
             <p>
               <label>Name:
               <input
                   type='text'
-                  ng-model='draft.yourName'
+                  ng-model='yourName'
                   placeholder='Enter a name here'
                   ></label>
               <label>Email:
               <input
                   type='email'
                   name='yourEmail'
-                  ng-model='draft.yourEmail'
+                  ng-model='yourEmail'
                   placeholder='Enter your e-mail address here'
                   ></label>
               <label>Content:
               <textarea
                   type='content'
                   name='yourContent'
-                  ng-model='draft.yourContent'
+                  ng-model='yourContent'
                   placeholder='Enter your e-mail content here'
                   ></textarea></label>
               <span ng-show='sendEmail.yourEmail.$error.email'
                     >Not a valid e-mail address ({{sendEmail.yourEmail.$error | json}})</span>
               <p>
-                <pre>"{{draft.yourName}} &lt;{{draft.yourEmail}}&gt;"{{"\n" + draft.yourContent }}</pre>
+                <pre>"{{yourName}} &lt;{{yourEmail}}&gt;"{{"\n" + yourContent }}</pre>
               </p>
             </p>
           </form>
@@ -49,14 +49,14 @@
       </pane>
       <pane title='Countries'>
         <h2>Countries</h2>
-        <div ng-controller='CountryController as country'>
-          <div ng-show='!country.all'>
+        <div ng-controller='CountryController as ctrl'>
+          <div ng-hide='all'>
             Empty list
           </div>
-          <div ng-show='country.all'>
+          <div ng-show='all'>
             <table>
               <tbody>
-                <tr ng-repeat='country in country.all | orderBy : country.sortCriterion : country.sortReverse'>
+                <tr ng-repeat='country in all | orderBy : sortCriterion : sortReverse'>
                   <th>{{country.Code}}</th>
                   <td>{{country.Name}}</td>
                   <td>{{country.Population}}</td>

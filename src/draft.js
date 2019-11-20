@@ -3,14 +3,14 @@
 angular.module('draftApp', [])
     .controller('CountryController', function($http, $scope)
     {
-        this.all = $scope.all = [];
-        this.sortCriterion = $scope.sortCriterion = 'Code';
-        this.sortReverse = $scope.sortReverse = false;
+        $scope.all = [];
+        $scope.sortCriterion = 'Code';
+        $scope.sortReverse = false;
 
         $scope.sortBy = (criterion) =>
-            criterion === this.sortCriterion
-                ? this.sortReverse = !this.sortReverse
-                : this.sortCriterion = criterion
+            criterion === $scope.sortCriterion
+                ? $scope.sortReverse = !$scope.sortReverse
+                : $scope.sortCriterion = criterion
                 ;
 
         const url = 'https://172.17.0.2/r/country'
@@ -21,14 +21,14 @@ angular.module('draftApp', [])
 
         $http
             .get(url, {headers, mode})
-            .then(({data}) => this.all = data)
+            .then(({data}) => $scope.all = data)
             .catch(error => console.error(error));
     })
     .controller('DraftController', function($scope)
     {
-        this.yourName = $scope.yourName || '';
-        this.yourEmail = $scope.yourEmail || '';
-        this.yourContent = $scope.yourContent || '';
+        $scope.yourName || '';
+        $scope.yourEmail || '';
+        $scope.yourContent || '';
     })
     .directive('tabs', () => (
         { restrict: 'E'
@@ -44,7 +44,7 @@ angular.module('draftApp', [])
                 this.addPane = (pane) =>
                 {
                     $scope.panes.length || $scope.switchTab(0);
-                    1 === $scope.panes.length && (pane.selected = true);
+                    2 === $scope.panes.length && (pane.selected = true);
                     $scope.panes.push(pane);
                 };
 
