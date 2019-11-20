@@ -4,6 +4,14 @@ angular.module('draftApp', [])
     .controller('CountryController', function($http, $scope)
     {
         this.all = $scope.all = [];
+        this.sortCriterion = $scope.sortCriterion = 'Code';
+        this.sortReverse = $scope.sortReverse = false;
+
+        $scope.sortBy = (criterion) =>
+            criterion === this.sortCriterion
+                ? this.sortReverse = !this.sortReverse
+                : this.sortCriterion = criterion
+                ;
 
         const url = 'https://172.17.0.2/r/country'
         const headers =
@@ -13,7 +21,7 @@ angular.module('draftApp', [])
 
         $http
             .get(url, {headers, mode})
-            .then(({data}) => this.all = $scope.all = data)
+            .then(({data}) => this.all = data)
             .catch(error => console.error(error));
     })
     .controller('DraftController', function($scope)

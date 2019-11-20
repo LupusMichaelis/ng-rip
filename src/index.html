@@ -56,7 +56,7 @@
           <div ng-show='country.all'>
             <table>
               <tbody>
-                <tr ng-repeat='country in country.all'>
+                <tr ng-repeat='country in country.all | orderBy : country.sortCriterion : country.sortReverse'>
                   <th>{{country.Code}}</th>
                   <td>{{country.Name}}</td>
                   <td>{{country.Population}}</td>
@@ -64,9 +64,12 @@
               </tbody>
               <thead>
                 <tr>
-                  <td>Code</td>
-                  <td>Nom</td>
-                  <td>Population</td>
+                  <td ng-click='sortBy(&apos;Code&apos;)'
+                      >Code</td>
+                  <td ng-click='sortBy(&apos;Name&apos;)'
+                      >Nom</td>
+                  <td ng-click='sortBy(&apos;Population&apos;)'
+                      >Population</td>
                 </tr>
               </thead>
           </div>
