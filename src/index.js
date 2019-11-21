@@ -37,9 +37,9 @@ app
 app
     .controller('DraftController', function($scope)
     {
-        $scope.yourName || '';
-        $scope.yourEmail || '';
-        $scope.yourContent || '';
+        this.yourName || '';
+        this.yourEmail || '';
+        this.yourContent || '';
     });
 
 app

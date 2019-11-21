@@ -5,27 +5,27 @@
       <label>Name:
       <input
           type='text'
-          ng-model='yourName'
+          ng-model='ctrl.yourName'
           placeholder='Enter a name here'
           ></label>
       <label>Email:
       <input
           type='email'
           name='yourEmail'
-          ng-model='yourEmail'
+          ng-model='ctrl.yourEmail'
           placeholder='Enter your e-mail address here'
           ></label>
       <label>Content:
       <textarea
           type='content'
           name='yourContent'
-          ng-model='yourContent'
+          ng-model='ctrl.yourContent'
           placeholder='Enter your e-mail content here'
           ></textarea></label>
       <span ng-show='sendEmail.yourEmail.$error.email'
             >Not a valid e-mail address ({{sendEmail.yourEmail.$error | json}})</span>
       <p>
-        <pre>"{{yourName}} &lt;{{yourEmail}}&gt;"{{"\n" + yourContent }}</pre>
+        <pre>"{{ctrl.yourName}} &lt;{{ctrl.yourEmail}}&gt;"{{"\n" + ctrl.yourContent }}</pre>
       </p>
     </p>
   </form>
