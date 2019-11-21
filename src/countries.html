@@ -1,12 +1,12 @@
 <h2>Countries</h2>
-<div ng-controller='CountryController as ctrl'>
-  <div ng-hide='all'>
+<div>
+  <div ng-hide='$ctrl.all'>
     Empty list
   </div>
-  <div ng-show='all'>
+  <div ng-show='$ctrl.all'>
     <table>
       <tbody>
-        <tr ng-repeat='country in all | orderBy : sortCriterion : sortReverse'>
+        <tr ng-repeat='country in $ctrl.all | orderBy : $ctrl.sortCriterion : $ctrl.sortReverse'>
           <th>{{country.Code}}</th>
           <td>{{country.Name}}</td>
           <td>{{country.Population | bigNumber}}</td>
@@ -14,11 +14,11 @@
       </tbody>
       <thead>
         <tr>
-          <td ng-click='sortBy(&apos;Code&apos;)'
+          <td ng-click='$ctrl.sortBy(&apos;Code&apos;)'
               >Code</td>
-          <td ng-click='sortBy(&apos;Name&apos;)'
+          <td ng-click='$ctrl.sortBy(&apos;Name&apos;)'
               >Nom</td>
-          <td ng-click='sortBy(&apos;Population&apos;)'
+          <td ng-click='$ctrl.sortBy(&apos;Population&apos;)'
               >Population</td>
         </tr>
       </thead>

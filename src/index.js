@@ -1,35 +1,48 @@
 'use strict';
 
-angular.module('draftApp', [])
-    .controller('CountryController', function($http, $scope)
-    {
-        $scope.all = [];
-        $scope.sortCriterion = null;
-        $scope.sortReverse = false;
+const app = angular.module('draftApp', []);
 
-        $scope.sortBy = (criterion) =>
-            criterion === $scope.sortCriterion
-                ? $scope.sortReverse = !$scope.sortReverse
-                : $scope.sortCriterion = criterion
-                ;
+app
+    .component
+        ( 'countries'
+        ,
+            { templateUrl: 'countries.html'
+            , controller: function ($http)
+                {
+                    this.all = [];
+                    this.sortCriterion = null;
+                    this.sortReverse = false;
 
-        const url = 'https://172.17.0.2/r/country'
-        const headers =
-            { 'content-type': 'application/json'
-            };
-        const mode = 'cors';
+                    this.sortBy = (criterion) =>
+                        criterion === this.sortCriterion
+                            ? this.sortReverse = !this.sortReverse
+                            : this.sortCriterion = criterion
+                            ;
 
-        $http
-            .get(url, {headers, mode})
-            .then(({data}) => $scope.all = data)
-            .catch(error => console.error(error));
-    })
+                    const url = 'https://172.17.0.2/r/country'
+                    const headers =
+                        { 'content-type': 'application/json'
+                        };
+                    const mode = 'cors';
+                    const that = this;
+
+                    $http
+                        .get(url, {headers, mode})
+                        .then(({data}) => that.all = data)
+                        .catch(error => console.error(error));
+                }
+            }
+        );
+
+app
     .controller('DraftController', function($scope)
     {
         $scope.yourName || '';
         $scope.yourEmail || '';
         $scope.yourContent || '';
-    })
+    });
+
+app
     .directive('tabs', () => (
         { restrict: 'E'
         , transclude: true
@@ -41,11 +54,21 @@ angular.module('draftApp', [])
                 $scope.panes = [];
                 $scope.tabIndex = 0;
 
+                const trueValues =
+                    [ ''
+                    ];
+
                 this.addPane = (pane) =>
                 {
+                    const isActiveByDefault =
+                        ('isActive' in pane
+                            && true === pane.isActive
+                            || ('string' === typeof pane['default']
+                                && -1 !== trueValues.indexOf(pane['default'])));
+
                     $scope.panes.push(pane);
 
-                    if(pane.isActive)
+                    if(isActiveByDefault)
                         $scope.switchTab(pane);
                 };
 
@@ -67,7 +90,7 @@ angular.module('draftApp', [])
         , transclude: true
         , scope:
             { title: '@'
-            , active: '='
+            , default: '@'
             }
         , link:
             ( scope
@@ -79,7 +102,9 @@ angular.module('draftApp', [])
         , templateUrl: 'tabpane.html'
         , replace: true
         })
-    )
+    );
+
+app
     .filter('bigNumber', () =>
     {
         const format =
