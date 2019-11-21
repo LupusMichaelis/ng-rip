@@ -52,7 +52,7 @@ app
         , controller: function($scope)
             {
                 $scope.panes = [];
-                $scope.tabIndex = 0;
+                this.tabIndex = 0;
 
                 const trueValues =
                     [ ''
@@ -74,10 +74,10 @@ app
 
                 $scope.switchTab = (pane) =>
                 {
-                    $scope.tabIndex < $scope.panes.length &&
-                        ($scope.panes[$scope.tabIndex].isActive = false);
-                    $scope.tabIndex = $scope.panes.indexOf(pane);
-                    $scope.panes[$scope.tabIndex].isActive = true;
+                    this.tabIndex < $scope.panes.length &&
+                        ($scope.panes[this.tabIndex].isActive = false);
+                    this.tabIndex = $scope.panes.indexOf(pane);
+                    pane.isActive = true;
                 }
             }
         , templateUrl: 'tabcontainer.html'
