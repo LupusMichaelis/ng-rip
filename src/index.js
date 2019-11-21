@@ -80,4 +80,41 @@ angular.module('draftApp', [])
         , replace: true
         })
     )
+    .filter('bigNumber', () =>
+    {
+        const format =
+        { 6: ''
+        , 9: 'k'
+        , 12: 'M'
+        , 15: 'G'
+        , 18: 'T'
+        , 21: 'P'
+        };
+
+        return (input) =>
+        {
+            input += '';
+
+            for(var limit in format)
+                if(null === format[limit])
+                {
+                    if(input.length <= limit)
+                        break;
+                }
+                else
+                {
+                    if(input.length <= limit)
+                    {
+                        input = input.slice(0, input.length - limit + 3)
+                            + ' '
+                            + input.slice(input.length - limit + 3, input.length - limit + 6)
+                            + ( format[limit] ? ' ' + format[limit] : '')
+                            ;
+                        break;
+                    }
+                }
+
+            return input;
+        };
+    })
 ;

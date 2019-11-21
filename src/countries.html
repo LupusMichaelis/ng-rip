@@ -9,7 +9,7 @@
         <tr ng-repeat='country in all | orderBy : sortCriterion : sortReverse'>
           <th>{{country.Code}}</th>
           <td>{{country.Name}}</td>
-          <td>{{country.Population}}</td>
+          <td>{{country.Population | bigNumber}}</td>
         </tr>
       </tbody>
       <thead>
