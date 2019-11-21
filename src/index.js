@@ -35,7 +35,7 @@ app
         );
 
 app
-    .controller('DraftController', function($scope)
+    .controller('DraftController', function()
     {
         this.yourName || '';
         this.yourEmail || '';
@@ -46,12 +46,16 @@ app
     .directive('tabs', () => (
         { restrict: 'E'
         , transclude: true
+        , replace: true
+        , templateUrl: 'tabcontainer.html'
+
         , scope:
             {
             }
-        , controller: function($scope)
+        , controllerAs: '$ctrl'
+        , controller: function()
             {
-                $scope.panes = [];
+                this.panes = [];
                 this.tabIndex = 0;
 
                 const trueValues =
@@ -66,28 +70,29 @@ app
                             || ('string' === typeof pane['default']
                                 && -1 !== trueValues.indexOf(pane['default'])));
 
-                    $scope.panes.push(pane);
+                    this.panes.push(pane);
 
                     if(isActiveByDefault)
-                        $scope.switchTab(pane);
+                        this.switchTab(pane);
                 };
 
-                $scope.switchTab = (pane) =>
+                this.switchTab = (pane) =>
                 {
-                    this.tabIndex < $scope.panes.length &&
-                        ($scope.panes[this.tabIndex].isActive = false);
-                    this.tabIndex = $scope.panes.indexOf(pane);
+                    this.tabIndex < this.panes.length &&
+                        (this.panes[this.tabIndex].isActive = false);
+                    this.tabIndex = this.panes.indexOf(pane);
                     pane.isActive = true;
                 }
             }
-        , templateUrl: 'tabcontainer.html'
-        , replace: true
         })
     )
     .directive('pane', () => (
         { require: '^tabs'
         , restrict: 'E'
         , transclude: true
+        , replace: true
+        , templateUrl: 'tabpane.html'
+
         , scope:
             { title: '@'
             , default: '@'
@@ -99,8 +104,6 @@ app
             , tabsController
             ) =>
                 tabsController.addPane(scope)
-        , templateUrl: 'tabpane.html'
-        , replace: true
         })
     );
 

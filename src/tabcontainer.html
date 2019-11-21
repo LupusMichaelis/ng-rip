@@ -1,12 +1,12 @@
 <div class='tabbable'>
   <ul class='nav nav-tabs'>
-    <li ng-repeat='pane in panes'
+    <li ng-repeat='pane in $ctrl.panes'
         class='nav-item'
         ng-class='{active: pane.isActive}'
         >
       <a
         class='nav-link'
-        ng-click='switchTab(pane)'
+        ng-click='$ctrl.switchTab(pane)'
         >{{ pane.title }}</a>
     </li>
   </ul>
